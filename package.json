@@ -45,7 +45,7 @@
     "react-native": ">=0.74.0"
   },
   "dependencies": {
-    "@umituz/react-native-google-translate": "latest",
+    "@umituz/react-native-google-translate": "*",
     "@types/react": "~19.1.10"
   },
   "devDependencies": {
