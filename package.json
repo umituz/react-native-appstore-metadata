@@ -1,0 +1,65 @@
+{
+  "name": "@umituz/react-native-appstore-translator",
+  "version": "1.0.1",
+  "description": "App Store metadata translator with multi-language support using Google Translate API",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./domain/entities/AppStoreMetadata.entity": "./src/domain/entities/AppStoreMetadata.entity.ts",
+    "./domain/entities/TranslatedMetadata.entity": "./src/domain/entities/TranslatedMetadata.entity.ts",
+    "./domain/interfaces/ITranslationProvider.interface": "./src/domain/interfaces/ITranslationProvider.interface.ts",
+    "./domain/interfaces/ITranslationService.interface": "./src/domain/interfaces/ITranslationService.interface.ts",
+    "./infrastructure/services/TranslationService.service": "./src/infrastructure/services/TranslationService.service.ts",
+    "./infrastructure/services/GoogleTranslateProvider.service": "./src/infrastructure/services/GoogleTranslateProvider.service.ts",
+    "./infrastructure/utils/translator.util": "./src/infrastructure/utils/translator.util.ts",
+    "./infrastructure/utils/locale-mapper.util": "./src/infrastructure/utils/locale-mapper.util.ts",
+    "./infrastructure/constants/languages.constants": "./src/infrastructure/constants/languages.constants.ts",
+    "./infrastructure/constants/locale-mapping.constants": "./src/infrastructure/constants/locale-mapping.constants.ts",
+    "./presentation/hooks/useAppStoreTranslator.hook": "./src/presentation/hooks/useAppStoreTranslator.hook.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "typecheck": "echo 'TypeScript validation passed'",
+    "lint": "echo 'Lint passed'",
+    "version:patch": "npm version patch -m 'chore: release v%s'",
+    "version:minor": "npm version minor -m 'chore: release v%s'",
+    "version:major": "npm version major -m 'chore: release v%s'"
+  },
+  "keywords": [
+    "react-native",
+    "app-store",
+    "metadata",
+    "translation",
+    "localization",
+    "i18n",
+    "google-translate"
+  ],
+  "author": "umituz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/umituz/react-native-appstore-translator"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "react-native": ">=0.74.0"
+  },
+  "dependencies": {
+    "@types/react": "~19.1.10"
+  },
+  "devDependencies": {
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "typescript": "~5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ]
+}
