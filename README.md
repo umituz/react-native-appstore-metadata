@@ -1,4 +1,4 @@
-# @umituz/react-native-appstore-translator
+# @umituz/react-native-appstore-metadata
 
 App Store metadata translator with multi-language support using Google Translate API.
 
@@ -15,7 +15,7 @@ App Store metadata translator with multi-language support using Google Translate
 ## Installation
 
 ```bash
-npm install @umituz/react-native-appstore-translator
+npm install @umituz/react-native-appstore-metadata
 ```
 
 ## Supported Languages
@@ -58,7 +58,7 @@ npm install @umituz/react-native-appstore-translator
 ### Basic Usage
 
 ```typescript
-import { useAppStoreTranslator } from '@umituz/react-native-appstore-translator/presentation';
+import { useAppStoreTranslator } from '@umituz/react-native-appstore-metadata/presentation';
 
 function MyComponent() {
   const { translateMetadata, isTranslating, progress } = useAppStoreTranslator({
@@ -92,7 +92,7 @@ function MyComponent() {
 ### Advanced Usage with Custom Provider
 
 ```typescript
-import { useAppStoreTranslator } from '@umituz/react-native-appstore-translator/presentation';
+import { useAppStoreTranslator } from '@umituz/react-native-appstore-metadata/presentation';
 import { TranslationService } from '@umituz/react-native-appstore-translator/infrastructure';
 import { myCustomProvider } from './my-custom-provider';
 
@@ -197,8 +197,8 @@ This package supports subpath imports for better tree-shaking:
 
 ```typescript
 // Import only what you need
-import { useAppStoreTranslator } from '@umituz/react-native-appstore-translator/presentation';
-import type { AppStoreMetadata } from '@umituz/react-native-appstore-translator/domain';
+import { useAppStoreTranslator } from '@umituz/react-native-appstore-metadata/presentation';
+import type { AppStoreMetadata } from '@umituz/react-native-appstore-metadata/domain';
 import { googleTranslateProvider } from '@umituz/react-native-appstore-translator/infrastructure';
 ```
 
@@ -212,4 +212,4 @@ umituz
 
 ## Repository
 
-https://github.com/umituz/react-native-appstore-translator
+https://github.com/umituz/react-native-appstore-metadata

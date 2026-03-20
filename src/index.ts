@@ -1,5 +1,5 @@
 /**
- * @umituz/react-native-appstore-translator
+ * @umituz/react-native-appstore-metadata
  * App Store metadata translator with multi-language support
  */
 
