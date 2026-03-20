@@ -13,14 +13,11 @@ import type {
 import type {
   TranslationProgress,
 } from "../../domain/interfaces/ITranslationService.interface";
-import type { ITranslationProvider } from "../../domain/interfaces/ITranslationProvider.interface";
-import { TranslationService } from "../../infrastructure/services/TranslationService.service";
-import { googleTranslateProvider } from "../../infrastructure/services/GoogleTranslateProvider.service";
+import { metadataTranslationService } from "../../infrastructure/services/MetadataTranslationService.service";
 import { SUPPORTED_LOCALES } from "../../infrastructure/constants/languages.constants";
 
 export interface UseAppStoreTranslatorOptions {
-  provider?: ITranslationProvider;
-  locales?: string[];
+  locales?: readonly string[];
 }
 
 export interface UseAppStoreTranslatorReturn {
@@ -36,10 +33,7 @@ export interface UseAppStoreTranslatorReturn {
 export function useAppStoreTranslator(
   options: UseAppStoreTranslatorOptions = {}
 ): UseAppStoreTranslatorReturn {
-  const {
-    provider = googleTranslateProvider,
-    locales: userLocales,
-  } = options;
+  const { locales: userLocales } = options;
 
   const locales: readonly string[] = userLocales ?? SUPPORTED_LOCALES;
 
@@ -57,11 +51,9 @@ export function useAppStoreTranslator(
       setProgress([]);
 
       try {
-        const service = new TranslationService(provider);
-
         const progressTracker: TranslationProgress[] = [];
 
-        const result = await service.translateMetadata(
+        const result = await metadataTranslationService.translateMetadata(
           metadata,
           locales,
           (progressUpdate) => {
@@ -81,7 +73,7 @@ export function useAppStoreTranslator(
         setIsTranslating(false);
       }
     },
-    [provider, locales]
+    [locales]
   );
 
   return {

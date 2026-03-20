@@ -1,6 +1,16 @@
 # @umituz/react-native-appstore-metadata
 
-App Store metadata translator with multi-language support using Google Translate API.
+App Store metadata management package with multi-language support, powered by @umituz/react-native-google-translate.
+
+## Features
+
+- ✅ **Metadata Translation**: Translate app store metadata to 40+ languages
+- ✅ **Field-by-field Translation**: Translate title, subtitle, keywords, description separately
+- ✅ **Progress Tracking**: Real-time progress updates during translation
+- ✅ **Type-Safe**: Full TypeScript support
+- ✅ **Google Translate Integration**: Uses @umituz/react-native-google-translate
+- ✅ **Rate Limiting**: Built-in API rate limiting
+- ✅ **Error Handling**: Graceful error handling with fallbacks
 
 ## Features
 
@@ -15,7 +25,7 @@ App Store metadata translator with multi-language support using Google Translate
 ## Installation
 
 ```bash
-npm install @umituz/react-native-appstore-metadata
+npm install @umituz/react-native-appstore-metadata @umituz/react-native-google-translate
 ```
 
 ## Supported Languages
@@ -182,13 +192,16 @@ interface TranslationProgress {
 
 ## Architecture
 
-This package follows Domain-Driven Design (DDD) principles with clean separation of concerns:
+This package follows Domain-Driven Design (DDD) principles and depends on:
+
+- **@umituz/react-native-google-translate**: For all translation operations
+- Clean separation between metadata management and translation logic
 
 ```
 src/
 ├── domain/           # Core business logic and types
-├── infrastructure/   # External integrations (Google Translate)
-└── presentation/     # React hooks and components
+├── infrastructure/   # Locale mapping, constants, metadata translation service
+└── presentation/     # React hooks
 ```
 
 ## Subpath Imports

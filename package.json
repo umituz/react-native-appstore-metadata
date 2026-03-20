@@ -1,7 +1,7 @@
 {
   "name": "@umituz/react-native-appstore-metadata",
-  "version": "1.2.0",
-  "description": "App Store metadata translator with multi-language support using Google Translate API",
+  "version": "2.0.0",
+  "description": "App Store metadata management with multi-language support, screenshot generation, and subscription handling",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "sideEffects": false,
@@ -9,11 +9,8 @@
     ".": "./src/index.ts",
     "./domain/entities/AppStoreMetadata.entity": "./src/domain/entities/AppStoreMetadata.entity.ts",
     "./domain/entities/TranslatedMetadata.entity": "./src/domain/entities/TranslatedMetadata.entity.ts",
-    "./domain/interfaces/ITranslationProvider.interface": "./src/domain/interfaces/ITranslationProvider.interface.ts",
     "./domain/interfaces/ITranslationService.interface": "./src/domain/interfaces/ITranslationService.interface.ts",
-    "./infrastructure/services/TranslationService.service": "./src/infrastructure/services/TranslationService.service.ts",
-    "./infrastructure/services/GoogleTranslateProvider.service": "./src/infrastructure/services/GoogleTranslateProvider.service.ts",
-    "./infrastructure/utils/translator.util": "./src/infrastructure/utils/translator.util.ts",
+    "./infrastructure/services/MetadataTranslationService.service": "./src/infrastructure/services/MetadataTranslationService.service.ts",
     "./infrastructure/utils/locale-mapper.util": "./src/infrastructure/utils/locale-mapper.util.ts",
     "./infrastructure/constants/languages.constants": "./src/infrastructure/constants/languages.constants.ts",
     "./infrastructure/constants/locale-mapping.constants": "./src/infrastructure/constants/locale-mapping.constants.ts",
@@ -34,7 +31,8 @@
     "translation",
     "localization",
     "i18n",
-    "google-translate"
+    "screenshot",
+    "subscription"
   ],
   "author": "umituz",
   "license": "MIT",
@@ -47,6 +45,7 @@
     "react-native": ">=0.74.0"
   },
   "dependencies": {
+    "@umituz/react-native-google-translate": "latest",
     "@types/react": "~19.1.10"
   },
   "devDependencies": {

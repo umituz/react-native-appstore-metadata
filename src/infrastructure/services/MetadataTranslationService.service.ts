@@ -1,44 +1,66 @@
 /**
- * Translation Service
- * @description Core service for translating app store metadata
+ * Metadata Translation Service
+ * @description Service for translating app store metadata using @umituz/react-native-google-translate
  */
 
 import type {
-  ITranslationService,
-  TranslationProgress,
-} from "../../domain/interfaces/ITranslationService.interface";
-import type { ITranslationProvider } from "../../domain/interfaces/ITranslationProvider.interface";
-import type {
   AppStoreMetadata,
+  AppStoreMetadataField,
 } from "../../domain/entities/AppStoreMetadata.entity";
 import type {
   TranslatedMetadata,
 } from "../../domain/entities/TranslatedMetadata.entity";
+import type {
+  ITranslationService,
+  TranslationProgress,
+} from "../../domain/interfaces/ITranslationService.interface";
+import { googleTranslateService } from "@umituz/react-native-google-translate";
 import {
   getGoogleTranslateLang,
   isEnglishVariant,
 } from "../utils/locale-mapper.util";
 
 async function translateField<T extends string | string[]>(
-  provider: ITranslationProvider,
   value: T,
   targetLang: string,
   isArray: boolean
 ): Promise<T> {
   if (isArray) {
-    return (await provider.translateBatch(value as string[], targetLang)) as T;
+    const results: string[] = [];
+    for (const item of value as string[]) {
+      const result = await googleTranslateService.translate({
+        text: item,
+        targetLanguage: targetLang,
+        sourceLanguage: "en",
+      });
+      results.push(result.translatedText);
+    }
+    return results as T;
   }
-  return (await provider.translate(value as string, targetLang)) as T;
+
+  const result = await googleTranslateService.translate({
+    text: value as string,
+    targetLanguage: targetLang,
+    sourceLanguage: "en",
+  });
+  return result.translatedText as T;
 }
 
-export class TranslationService implements ITranslationService {
-  constructor(private provider: ITranslationProvider) {}
-
+export class MetadataTranslationService implements ITranslationService {
   async translateMetadata(
     metadata: AppStoreMetadata,
     targetLocales: readonly string[],
     onProgress?: (progress: TranslationProgress) => void
   ): Promise<TranslatedMetadata> {
+    // Initialize google translate service
+    if (!googleTranslateService.isInitialized()) {
+      googleTranslateService.initialize({
+        minDelay: 100,
+        maxRetries: 3,
+        timeout: 10000,
+      });
+    }
+
     const result: TranslatedMetadata = {
       "en-US": metadata,
     };
@@ -70,7 +92,7 @@ export class TranslationService implements ITranslationService {
         try {
           onProgress?.({ field, locale, status: "translating" });
           (translatedMetadata as unknown as Record<string, unknown>)[field] =
-            await translateField(this.provider, value, getGoogleTranslateLang(locale), isArray);
+            await translateField(value, getGoogleTranslateLang(locale), isArray);
           onProgress?.({ field, locale, status: "completed" });
         } catch (error) {
           onProgress?.({
@@ -95,3 +117,5 @@ export class TranslationService implements ITranslationService {
     return result;
   }
 }
+
+export const metadataTranslationService = new MetadataTranslationService();

@@ -1,6 +1,6 @@
 /**
  * @umituz/react-native-appstore-metadata
- * App Store metadata translator with multi-language support
+ * App Store metadata management with multi-language support
  */
 
 export type {
@@ -12,18 +12,14 @@ export type {
   TranslatedMetadata,
 } from "./domain/entities/TranslatedMetadata.entity";
 
-export type { ITranslationProvider } from "./domain/interfaces/ITranslationProvider.interface";
-
 export type {
   ITranslationService,
   TranslationProgress,
   TranslationStatus,
 } from "./domain/interfaces/ITranslationService.interface";
 
-export { TranslationService } from "./infrastructure/services/TranslationService.service";
-export { GoogleTranslateProvider, googleTranslateProvider } from "./infrastructure/services/GoogleTranslateProvider.service";
+export { MetadataTranslationService, metadataTranslationService } from "./infrastructure/services/MetadataTranslationService.service";
 
-export { translateText } from "./infrastructure/utils/translator.util";
 export {
   getGoogleTranslateLang,
   isEnglishVariant,
