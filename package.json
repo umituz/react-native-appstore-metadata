@@ -1,6 +1,6 @@
 {
   "name": "@umituz/react-native-appstore-metadata",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "App Store metadata management with multi-language support, screenshot generation, and subscription handling",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
