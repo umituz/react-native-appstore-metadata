@@ -67,9 +67,7 @@ export async function generateAppStoreMetadata(options: GenerateAppStoreOptions)
       const metadata: AppStoreMetadata = require(sourceFilePath).default;
 
       // Convert to App Store .strings format
-      const stringsContent = `"name" = ${JSON.stringify(metadata.name)};
-"subtitle" = ${JSON.stringify(metadata.subtitle)};
-"description" = ${JSON.stringify(metadata.description)};
+      const stringsContent = `"description" = ${JSON.stringify(metadata.description)};
 "keywords" = ${JSON.stringify(metadata.keywords)};
 "promotionalText" = ${JSON.stringify(metadata.promotionalText)};
 "whatsNew" = ${JSON.stringify(metadata.whatsNew)};
