@@ -50,3 +50,51 @@ export const GOOGLE_TRANSLATE_LANG_MAP: Record<string, string> = {
   "zh-CN": "zh-CN",
   "zh-TW": "zh-TW",
 };
+
+/**
+ * App Store Connect locale code mapping
+ * Maps our locale codes to App Store Connect locale codes
+ */
+export const ASC_LOCALE_MAP: Record<string, string> = {
+  "ar-SA": "ar-SA",
+  "bg-BG": "bg",
+  "cs-CZ": "cs",
+  "da-DK": "da",
+  "de-DE": "de-DE",
+  "el-GR": "el",
+  "en-AU": "en-AU",
+  "en-CA": "en-CA",
+  "en-GB": "en-GB",
+  "en-US": "en-US",
+  "es-ES": "es-ES",
+  "es-MX": "es-MX",
+  "fi-FI": "fi",
+  "fr-CA": "fr-CA",
+  "fr-FR": "fr-FR",
+  "hi-IN": "hi",
+  "hr-HR": "hr",
+  "hu-HU": "hu",
+  "id-ID": "id",
+  "it-IT": "it",
+  "ja-JP": "ja",
+  "ko-KR": "ko",
+  "ms-MY": "ms",
+  "nl-NL": "nl-NL",
+  "no-NO": "no",
+  "pl-PL": "pl",
+  "pt-BR": "pt-BR",
+  "pt-PT": "pt-PT",
+  "ro-RO": "ro",
+  "ru-RU": "ru",
+  "sk-SK": "sk",
+  "sl-SI": "sl",
+  "sv-SE": "sv",
+  "th-TH": "th",
+  "tl-PH": "tl",
+  "tr-TR": "tr",
+  "uk-UA": "uk",
+  "vi-VN": "vi",
+  "zh-CN": "zh-Hans",
+  "zh-TW": "zh-Hant",
+};
+

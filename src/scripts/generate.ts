@@ -8,6 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { ASC_LOCALE_MAP } from '../infrastructure/constants/locale-mapping.constants';
 
 export interface AppStoreMetadata {
   name: string;
@@ -74,11 +75,14 @@ ${metadata.supportUrl ? `"supportUrl" = ${JSON.stringify(metadata.supportUrl)};`
 ${metadata.marketingUrl ? `"marketingUrl" = ${JSON.stringify(metadata.marketingUrl)};` : ''}
 `;
 
+      // Map locale code to App Store Connect format
+      const ascLocale = ASC_LOCALE_MAP[langCode] || langCode;
+
       // Write .strings file
-      const targetFilePath = path.join(outputPath, `${langCode}.strings`);
+      const targetFilePath = path.join(outputPath, `${ascLocale}.strings`);
       fs.writeFileSync(targetFilePath, stringsContent);
 
-      console.log(`  ✅ Generated: ${langCode}.strings\n`);
+      console.log(`  ✅ Generated: ${ascLocale}.strings (${langCode})\n`);
     } catch (error) {
       console.log(`  ⚠️  Failed to process ${langCode}: ${(error as Error).message}\n`);
     }

@@ -12,6 +12,7 @@ exports.generateAppStoreMetadata = generateAppStoreMetadata;
 exports.runGenerateAppStore = runGenerateAppStore;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const locale_mapping_constants_1 = require("../infrastructure/constants/locale-mapping.constants");
 async function generateAppStoreMetadata(options) {
     const { sourceDir, outputDir } = options;
     const sourcePath = path_1.default.resolve(process.cwd(), sourceDir);
@@ -48,10 +49,12 @@ async function generateAppStoreMetadata(options) {
 ${metadata.supportUrl ? `"supportUrl" = ${JSON.stringify(metadata.supportUrl)};` : ''}
 ${metadata.marketingUrl ? `"marketingUrl" = ${JSON.stringify(metadata.marketingUrl)};` : ''}
 `;
+            // Map locale code to App Store Connect format
+            const ascLocale = locale_mapping_constants_1.ASC_LOCALE_MAP[langCode] || langCode;
             // Write .strings file
-            const targetFilePath = path_1.default.join(outputPath, `${langCode}.strings`);
+            const targetFilePath = path_1.default.join(outputPath, `${ascLocale}.strings`);
             fs_1.default.writeFileSync(targetFilePath, stringsContent);
-            console.log(`  ✅ Generated: ${langCode}.strings\n`);
+            console.log(`  ✅ Generated: ${ascLocale}.strings (${langCode})\n`);
         }
         catch (error) {
             console.log(`  ⚠️  Failed to process ${langCode}: ${error.message}\n`);
