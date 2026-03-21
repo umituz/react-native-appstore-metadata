@@ -67,12 +67,15 @@ export async function generateAppStoreMetadata(options: GenerateAppStoreOptions)
       const metadata: AppStoreMetadata = require(sourceFilePath).default;
 
       // Convert to App Store .strings format
-      const stringsContent = `"description" = ${JSON.stringify(metadata.description)};
+      const stringsContent = `"name" = ${JSON.stringify(metadata.name)};
+"subtitle" = ${JSON.stringify(metadata.subtitle)};
+"description" = ${JSON.stringify(metadata.description)};
 "keywords" = ${JSON.stringify(metadata.keywords)};
 "promotionalText" = ${JSON.stringify(metadata.promotionalText)};
 "whatsNew" = ${JSON.stringify(metadata.whatsNew)};
 ${metadata.supportUrl ? `"supportUrl" = ${JSON.stringify(metadata.supportUrl)};` : ''}
 ${metadata.marketingUrl ? `"marketingUrl" = ${JSON.stringify(metadata.marketingUrl)};` : ''}
+${metadata.privacyPolicyUrl ? `"privacyPolicyUrl" = ${JSON.stringify(metadata.privacyPolicyUrl)};` : ''}
 `;
 
       // Map locale code to App Store Connect format

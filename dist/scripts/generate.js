@@ -42,12 +42,15 @@ async function generateAppStoreMetadata(options) {
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             const metadata = require(sourceFilePath).default;
             // Convert to App Store .strings format
-            const stringsContent = `"description" = ${JSON.stringify(metadata.description)};
+            const stringsContent = `"name" = ${JSON.stringify(metadata.name)};
+"subtitle" = ${JSON.stringify(metadata.subtitle)};
+"description" = ${JSON.stringify(metadata.description)};
 "keywords" = ${JSON.stringify(metadata.keywords)};
 "promotionalText" = ${JSON.stringify(metadata.promotionalText)};
 "whatsNew" = ${JSON.stringify(metadata.whatsNew)};
 ${metadata.supportUrl ? `"supportUrl" = ${JSON.stringify(metadata.supportUrl)};` : ''}
 ${metadata.marketingUrl ? `"marketingUrl" = ${JSON.stringify(metadata.marketingUrl)};` : ''}
+${metadata.privacyPolicyUrl ? `"privacyPolicyUrl" = ${JSON.stringify(metadata.privacyPolicyUrl)};` : ''}
 `;
             // Map locale code to App Store Connect format
             const ascLocale = locale_mapping_constants_1.ASC_LOCALE_MAP[langCode] || langCode;
