@@ -24,7 +24,7 @@ async function generateAppStoreMetadata(options) {
     if (!fs_1.default.existsSync(outputPath)) {
         fs_1.default.mkdirSync(outputPath, { recursive: true });
     }
-    console.log('\n📝 Generating App Store metadata JSON files...\n');
+    console.log('\n📝 Generating App Store metadata .strings files...\n');
     // Get all locale files
     const files = fs_1.default.readdirSync(sourcePath)
         .filter(f => f.match(/^[a-z]{2}-[A-Z]{2}\.ts$/) && f !== 'en-US.ts')
@@ -40,31 +40,27 @@ async function generateAppStoreMetadata(options) {
         try {
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             const metadata = require(sourceFilePath).default;
-            // Convert to App Store JSON format
-            const jsonContent = {
-                name: metadata.name,
-                subtitle: metadata.subtitle,
-                description: metadata.description,
-                keywords: metadata.keywords,
-                promotionalText: metadata.promotionalText,
-                whatsNew: metadata.whatsNew,
-                privacyPolicyUrl: metadata.privacyPolicyUrl,
-                supportUrl: metadata.supportUrl,
-                marketingUrl: metadata.marketingUrl,
-            };
-            // Write JSON file
-            const targetFilePath = path_1.default.join(outputPath, `${langCode}.json`);
-            fs_1.default.writeFileSync(targetFilePath, JSON.stringify(jsonContent, null, 2) + '\n');
-            console.log(`  ✅ Generated: ${langCode}.json\n`);
+            // Convert to App Store .strings format
+            const stringsContent = `"description" = ${JSON.stringify(metadata.description)};
+"keywords" = ${JSON.stringify(metadata.keywords)};
+"promotionalText" = ${JSON.stringify(metadata.promotionalText)};
+"whatsNew" = ${JSON.stringify(metadata.whatsNew)};
+${metadata.supportUrl ? `"supportUrl" = ${JSON.stringify(metadata.supportUrl)};` : ''}
+${metadata.marketingUrl ? `"marketingUrl" = ${JSON.stringify(metadata.marketingUrl)};` : ''}
+`;
+            // Write .strings file
+            const targetFilePath = path_1.default.join(outputPath, `${langCode}.strings`);
+            fs_1.default.writeFileSync(targetFilePath, stringsContent);
+            console.log(`  ✅ Generated: ${langCode}.strings\n`);
         }
         catch (error) {
             console.log(`  ⚠️  Failed to process ${langCode}: ${error.message}\n`);
         }
     }
-    console.log('✅ All JSON files generated!');
+    console.log('✅ All .strings files generated!');
     console.log(`\n📁 Output directory: ${outputPath}`);
-    console.log('\n🚀 Next step: Push to App Store Connect');
-    console.log(`   asc metadata push --app "YOUR_APP_ID" --dir ${outputDir}\n`);
+    console.log('\n🚀 Next step: Upload to App Store Connect');
+    console.log(`   asc localizations upload --version "VERSION_ID" --path ${outputDir}\n`);
 }
 // CLI interface
 function runGenerateAppStore() {
