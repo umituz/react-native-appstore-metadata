@@ -10,6 +10,53 @@ export {
   getLanguageDisplayName,
 } from '@umituz/react-native-google-translate';
 
+/**
+ * App Store Connect supported locales
+ * @description Only these locales are supported by App Store Connect
+ * Other locales will be automatically skipped during translation
+ */
+export const APPSTORE_SUPPORTED_LOCALES = [
+  "ar-SA",
+  "ca",
+  "cs",
+  "da",
+  "de-DE",
+  "el",
+  "en-AU",
+  "en-CA",
+  "en-GB",
+  "en-US",
+  "es-ES",
+  "es-MX",
+  "fi",
+  "fr-CA",
+  "fr-FR",
+  "he",
+  "hi",
+  "hr",
+  "hu",
+  "id",
+  "it",
+  "ja",
+  "ko",
+  "ms",
+  "nl-NL",
+  "no",
+  "pl",
+  "pt-BR",
+  "pt-PT",
+  "ro",
+  "ru",
+  "sk",
+  "sv",
+  "th",
+  "tr",
+  "uk",
+  "vi",
+  "zh-Hans",
+  "zh-Hant",
+] as const;
+
 export const SUPPORTED_LOCALES = [
   "ar-SA",
   "bg-BG",

@@ -31,12 +31,54 @@ async function translateAppStoreMetadata(options) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const sourceMetadata = require(sourcePath).default;
     console.log('\n🌍 Translating App Store metadata...\n');
-    // Get all supported languages
+    // Get all supported languages that are also supported by App Store Connect
     const languages = Object.keys(languages_constants_1.LANGUAGE_MAP).filter(lang => {
         // Skip English variants
         if (lang.startsWith('en-') && lang !== 'en-US')
             return false;
-        return true;
+        // Only include languages supported by App Store Connect
+        const localeMap = {
+            "ar-SA": "ar-SA",
+            "ca": "ca",
+            "cs": "cs",
+            "da": "da",
+            "de-DE": "de-DE",
+            "el": "el",
+            "en-AU": "en-AU",
+            "en-CA": "en-CA",
+            "en-GB": "en-GB",
+            "en-US": "en-US",
+            "es-ES": "es-ES",
+            "es-MX": "es-MX",
+            "fi": "fi",
+            "fr-CA": "fr-CA",
+            "fr-FR": "fr-FR",
+            "he": "he",
+            "hi": "hi",
+            "hr": "hr",
+            "hu": "hu",
+            "id": "id",
+            "it": "it",
+            "ja": "ja",
+            "ko": "ko",
+            "ms": "ms",
+            "nl-NL": "nl-NL",
+            "no": "no",
+            "pl": "pl",
+            "pt-BR": "pt-BR",
+            "pt-PT": "pt-PT",
+            "ro": "ro",
+            "ru": "ru",
+            "sk": "sk",
+            "sv": "sv",
+            "th": "th",
+            "tr": "tr",
+            "uk": "uk",
+            "vi": "vi",
+            "zh-CN": "zh-Hans",
+            "zh-TW": "zh-Hant",
+        };
+        return localeMap[lang] !== undefined;
     }).sort();
     console.log(`📊 Languages to translate: ${languages.length}\n`);
     for (const langCode of languages) {

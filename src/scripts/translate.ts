@@ -8,7 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import { googleTranslateService } from '@umituz/react-native-google-translate';
-import { LANGUAGE_MAP, getLanguageDisplayName } from '../infrastructure/constants/languages.constants';
+import { LANGUAGE_MAP, getLanguageDisplayName, APPSTORE_SUPPORTED_LOCALES } from '../infrastructure/constants/languages.constants';
 
 export interface AppStoreMetadata {
   name: string;
@@ -50,11 +50,55 @@ export async function translateAppStoreMetadata(options: TranslateAppStoreOption
 
   console.log('\n🌍 Translating App Store metadata...\n');
 
-  // Get all supported languages
+  // Get all supported languages that are also supported by App Store Connect
   const languages = Object.keys(LANGUAGE_MAP).filter(lang => {
     // Skip English variants
     if (lang.startsWith('en-') && lang !== 'en-US') return false;
-    return true;
+
+    // Only include languages supported by App Store Connect
+    const localeMap: Record<string, string> = {
+      "ar-SA": "ar-SA",
+      "ca": "ca",
+      "cs": "cs",
+      "da": "da",
+      "de-DE": "de-DE",
+      "el": "el",
+      "en-AU": "en-AU",
+      "en-CA": "en-CA",
+      "en-GB": "en-GB",
+      "en-US": "en-US",
+      "es-ES": "es-ES",
+      "es-MX": "es-MX",
+      "fi": "fi",
+      "fr-CA": "fr-CA",
+      "fr-FR": "fr-FR",
+      "he": "he",
+      "hi": "hi",
+      "hr": "hr",
+      "hu": "hu",
+      "id": "id",
+      "it": "it",
+      "ja": "ja",
+      "ko": "ko",
+      "ms": "ms",
+      "nl-NL": "nl-NL",
+      "no": "no",
+      "pl": "pl",
+      "pt-BR": "pt-BR",
+      "pt-PT": "pt-PT",
+      "ro": "ro",
+      "ru": "ru",
+      "sk": "sk",
+      "sv": "sv",
+      "th": "th",
+      "tr": "tr",
+      "uk": "uk",
+      "vi": "vi",
+      "zh-CN": "zh-Hans",
+      "zh-TW": "zh-Hant",
+    };
+
+    return localeMap[lang] !== undefined;
   }).sort();
 
   console.log(`📊 Languages to translate: ${languages.length}\n`);
