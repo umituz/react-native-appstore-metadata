@@ -3,6 +3,13 @@
  * @description List of supported locales for app store metadata translation
  */
 
+// Import from google-translate package for consistency
+export {
+  LANGUAGE_MAP,
+  LANGUAGE_NAMES,
+  getLanguageDisplayName,
+} from '@umituz/react-native-google-translate';
+
 export const SUPPORTED_LOCALES = [
   "ar-SA",
   "bg-BG",

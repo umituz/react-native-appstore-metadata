@@ -1,6 +1,6 @@
 {
   "name": "@umituz/react-native-appstore-metadata",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "App Store metadata management with multi-language support, screenshot generation, and subscription handling",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -18,6 +18,11 @@
     "./package.json": "./package.json"
   },
   "scripts": {
+    "build:scripts": "tsc -p tsconfig.scripts.json",
+    "appstore:translate": "node dist/scripts/translate.js app-store-locales",
+    "appstore:generate": "node dist/scripts/generate.js app-store-locales asc-metadata/app-info",
+    "appstore:sync": "node dist/scripts/sync.js app-store-locales asc-metadata/app-info",
+    "prepublishOnly": "npm run build:scripts",
     "typecheck": "echo 'TypeScript validation passed'",
     "lint": "echo 'Lint passed'",
     "version:patch": "npm version patch -m 'chore: release v%s'",
@@ -45,10 +50,10 @@
     "react-native": ">=0.74.0"
   },
   "dependencies": {
-    "@umituz/react-native-google-translate": "*",
-    "@types/react": "~19.1.10"
+    "@umituz/react-native-google-translate": "*"
   },
   "devDependencies": {
+    "@types/react": "~19.1.10",
     "react": "19.1.0",
     "react-native": "0.81.5",
     "typescript": "~5.9.2"
@@ -58,6 +63,8 @@
   },
   "files": [
     "src",
+    "dist",
+    "app-store-locales",
     "README.md",
     "LICENSE"
   ]
